@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: sc-sun-gateway
+  profiles:
+    active: test
+  cloud:
+    config:
+      uri: http://localhost:9999

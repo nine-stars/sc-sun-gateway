@@ -10,7 +10,6 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.ComponentScan;
 
 
-@EnableAutoConfiguration
 @SpringBootApplication
 @ComponentScan(basePackages={"com.iyb.ak"})
 @EnableFeignClients
