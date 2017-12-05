@@ -1,5 +1,7 @@
 package com.iyb.ak;
 
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -18,10 +20,16 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableHystrix
 @EnableZuulProxy
 @EnableDiscoveryClient
-public class GatewayApplication {
+@Slf4j
+public class GatewayApplication implements CommandLineRunner {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GatewayApplication.class, args);
 	}
 
+
+	@Override
+	public void run(String... args) throws Exception {
+		log.info(">>>>>>>>>>>>>>> sc-sun-gateway 启动完成<<<<<<<<<<<<<");
+	}
 }
