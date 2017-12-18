@@ -18,11 +18,11 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 public class WebConfig extends WebMvcConfigurerAdapter {
-	
+
 	@Bean
 	public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
-		
+
 		ObjectMapper objectMapper = new ObjectMapper();
 //		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);	// 排除值为空属性
 //		objectMapper.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);// 排除初始值未被改变的属性
@@ -33,7 +33,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //		objectMapper.setDateFormat(dateFormat);
 		// 设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
 		objectMapper.disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
-		
+
 		jsonConverter.setObjectMapper(objectMapper);
 		return jsonConverter;
 	}
@@ -52,6 +52,48 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		return registration;
 	}
 
+	/*@Bean
+	public FilterRegistrationBean captchaFilter() {
+		JCaptchaValidateFilter filter = new JCaptchaValidateFilter();
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.addUrlPatterns("/oauth/token");
+		registration.addUrlPatterns("/isp/login");
+		registration.setFilter(filter);
+		registration.setOrder(2);
+		return registration;
+	}
+
+	@Bean
+	public FilterRegistrationBean h5CaptchaFilter() {
+		H5JCaptchaValidateFilter filter = new H5JCaptchaValidateFilter();
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(filter);
+		registration.setOrder(2);
+		return registration;
+	}
+
+	@Bean
+	public FilterRegistrationBean urlCheckFilter() {
+		UrlCheckFilter filter = new UrlCheckFilter();
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(filter);
+		registration.setOrder(4);
+		return registration;
+	}
+
+	@Bean
+	public FilterRegistrationBean trackerFilter() {
+		TrackerFilter filter = new TrackerFilter();
+		FilterRegistrationBean registration = new FilterRegistrationBean();
+		registration.setFilter(filter);
+		registration.setOrder(1000);
+		return registration;
+	}
+
+	@Bean
+	public ErrorZuulFilter errorZuulFilter(){
+		return new ErrorZuulFilter();
+	}*/
 
 	@Bean
 	public TrackerZuulFilter trackerZuulFilter(){
