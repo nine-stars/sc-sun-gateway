@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iyb.ak.mapper.UserRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.iyb.ak.entity.UserRole" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="UUID" property="uuid" jdbcType="CHAR" />
+    <result column="COMP_UUID" property="compUuid" jdbcType="CHAR" />
+    <result column="USER_UUID" property="userUuid" jdbcType="CHAR" />
+    <result column="ROLE_UUID" property="roleUuid" jdbcType="CHAR" />
+    <result column="EMPL_UUID" property="emplUuid" jdbcType="CHAR" />
+    <result column="ON_OFF_FLAG" property="onOffFlag" jdbcType="CHAR" />
+    <result column="RELA_STATUS" property="relaStatus" jdbcType="CHAR" />
+    <result column="INSERT_USER" property="insertUser" jdbcType="CHAR" />
+    <result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="CHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="BIT" />
+  </resultMap>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iyb.ak.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.iyb.ak.entity.Role" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="UUID" property="uuid" jdbcType="CHAR" />
+    <result column="COMP_UUID" property="compUuid" jdbcType="CHAR" />
+    <result column="ROLE_CODE" property="roleCode" jdbcType="VARCHAR" />
+    <result column="ROLE_NAME" property="roleName" jdbcType="VARCHAR" />
+    <result column="ROLE_LEVEL" property="roleLevel" jdbcType="SMALLINT" />
+    <result column="DESCRIPTION" property="description" jdbcType="VARCHAR" />
+    <result column="INSERT_USER" property="insertUser" jdbcType="CHAR" />
+    <result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="CHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="BIT" />
+  </resultMap>
+
+
+  <select id="getMetaSource" resultType="java.util.HashMap">
+    <![CDATA[
+    SELECT
+      a.URL AS url,
+      UPPER(a.HTTP_METHOD) AS methods,
+      UPPER(
+        GROUP_CONCAT(DISTINCT p.CODE SEPARATOR ',')
+      ) AS perms
+    FROM
+      `t_permission_api` AS pa
+      INNER JOIN `t_api` AS a
+        ON a.UUID = pa.API_UUID
+      INNER JOIN `t_permission` p
+        ON p.UUID = pa.PERMISSION_UUID
+    GROUP BY a.UUID
+    ORDER BY a.ORDER_NUM
+    ]]>
+  </select>
+
+
+  <select id="getDefaultMetaSource" resultType="java.util.HashMap">
+    <![CDATA[
+    SELECT
+      url,
+      UPPER(HTTP_METHOD) AS methods,
+      UPPER(PERMS) as perms,
+      type
+    FROM
+      `t_permission_api_default`
+    where type = #{type}
+    ORDER BY TYPE,ORDER_NUM;
+    ]]>
+  </select>
+
+  <select id="getRolesByUserId" resultMap="BaseResultMap">
+    SELECT
+    r.*
+    FROM
+    `t_user_role` AS ur
+    INNER JOIN `t_role` AS r
+    ON ur.ROLE_UUID = r.UUID
+    AND ur.USER_UUID = #{userId}
+    AND ur.COMP_UUID = #{compId}
+    AND ur.RELA_STATUS = 1
+    AND ur.ON_OFF_FLAG = 0
+    AND ur.DELETE_FLAG = 0
+  </select>
+
+
+</mapper>

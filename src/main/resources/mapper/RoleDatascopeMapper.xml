@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iyb.ak.mapper.RoleDatascopeMapper" >
+  <resultMap id="BaseResultMap" type="com.iyb.ak.entity.RoleDatascope" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="UUID" property="uuid" jdbcType="CHAR" />
+    <result column="COMP_UUID" property="compUuid" jdbcType="CHAR" />
+    <result column="ROLE_UUID" property="roleUuid" jdbcType="CHAR" />
+    <result column="ORG_UUID" property="orgUuid" jdbcType="CHAR" />
+    <result column="INSERT_USER" property="insertUser" jdbcType="CHAR" />
+    <result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="CHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="BIT" />
+  </resultMap>
+</mapper>

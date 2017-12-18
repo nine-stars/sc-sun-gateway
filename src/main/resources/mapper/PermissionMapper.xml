@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.iyb.ak.mapper.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.iyb.ak.entity.Permission" >
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="UUID" property="uuid" jdbcType="CHAR" />
+    <result column="CODE" property="code" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="ENABLE" property="enable" jdbcType="BIT" />
+    <result column="P_UUID" property="pUuid" jdbcType="CHAR" />
+    <result column="PERMISSION_LEVEL" property="permissionLevel" jdbcType="INTEGER" />
+    <result column="INSERT_USER" property="insertUser" jdbcType="CHAR" />
+    <result column="INSERT_TIME" property="insertTime" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_USER" property="updateUser" jdbcType="CHAR" />
+    <result column="UPDATE_TIME" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="DELETE_FLAG" property="deleteFlag" jdbcType="BIT" />
+  </resultMap>
+
+
+
+
+  <select id="getPermissionsByUser" resultMap="BaseResultMap">
+    SELECT
+    p.*
+    FROM
+    (SELECT DISTINCT
+    rp.PERMISSION_UUID
+    FROM
+    `t_user_role` AS ur
+    INNER JOIN `t_role_permission` AS rp
+    ON ur.ROLE_UUID = rp.ROLE_UUID
+    AND ur.RELA_STATUS = 1
+    AND ur.ON_OFF_FLAG = 0
+    AND ur.DELETE_FLAG = 0
+    WHERE ur.USER_UUID = #{userId}
+    AND ur.COMP_UUID = #{compId}) AS t1
+    INNER JOIN `t_permission` AS p
+    ON p.UUID = t1.PERMISSION_UUID
+    INNER JOIN t_version_permission AS vp
+    ON vp.PERMISSION_UUID = t1.PERMISSION_UUID
+    AND vp.VERSION_UUID = #{versionId}
+  </select>
+
+</mapper>
